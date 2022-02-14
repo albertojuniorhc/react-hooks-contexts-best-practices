@@ -21,7 +21,7 @@ function UserData() {
         margin="normal"
       />
       <Button variant="contained" color="primary" type="submit">
-        Send
+        Next
       </Button>
     </form>
   );

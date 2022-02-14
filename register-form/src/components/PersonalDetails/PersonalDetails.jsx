@@ -86,7 +86,7 @@ function RegisterForm({ onSubmitForm, isCPFValid }) {
       />
 
       <Button variant="contained" color="primary" type="submit">
-        Send
+        Next
       </Button>
     </form>
   );
