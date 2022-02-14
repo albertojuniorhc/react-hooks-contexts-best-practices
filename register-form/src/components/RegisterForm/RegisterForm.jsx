@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import React from "react";
 import { useState } from "react";
 import DeliveryDetails from "../DeliveryDetails/DeliveryDetails";
@@ -11,11 +10,10 @@ function RegisterForm({ onSubmitForm, validation }) {
   const forms = [
     <UserData onSubmitForm={nextStep} />,
     <PersonalDetails onSubmitForm={nextStep} validation={validation} />,
-    <DeliveryDetails onSubmitForm={onSubmitForm} />,
-    <Typography>Error on form select!</Typography>,
+    <DeliveryDetails onSubmitForm={onSubmitForm} />
   ];
 
-  function nextStep() {
+  function nextStep(dataForms) {
     setCurrentStep(currentStep + 1);
   }
 
