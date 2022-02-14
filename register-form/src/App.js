@@ -6,6 +6,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { isCPFValid, isPasswordValid } from "./models/validations";
 
 function App() {
   return (
@@ -13,21 +14,16 @@ function App() {
       <Typography variant="h3" component="h1" align="center">
         Register Form
       </Typography>
-      <RegisterForm onSubmitForm={submitAllForms} validation={isCPFValid} />
+      <RegisterForm
+        onSubmitForm={submitAllForms}
+        validations={{ cpf: isCPFValid, password: isPasswordValid }}
+      />
     </Container>
   );
 }
 
 function submitAllForms(dataForm) {
   console.log(dataForm);
-}
-
-function isCPFValid(cpf) {
-  if (cpf.length !== 11) {
-    return { isValid: false, text: "This field must have 11 digits." };
-  } else {
-    return { isValid: true, text: "" };
-  }
 }
 
 export default App;

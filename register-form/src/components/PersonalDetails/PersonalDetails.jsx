@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import { Button, TextField, Switch, FormControlLabel } from "@mui/material";
 
-function RegisterForm({ onSubmitForm, validation }) {
+function RegisterForm({ onSubmitForm, validations }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [cpf, setCpf] = useState("");
   const [promo, setPromo] = useState(true);
   const [news, setNews] = useState(true);
   const [errors, setErrors] = useState({ cpf: { isValid: true, text: "" } });
+
+  function fieldValidation(event) {
+    // console.log(validations)
+    const { name, value } = event.target;
+    const valid = validations[name](value);
+    const newObjErrors = { ...errors, [name]: valid };
+    setErrors(newObjErrors);
+  }
+
   return (
     <form
       onSubmit={(event) => {
@@ -44,12 +53,8 @@ function RegisterForm({ onSubmitForm, validation }) {
         }}
         id="cpf"
         label="CPF"
-        onBlur={(event) => {
-          const validationCPF = validation(event.target.value);
-          setErrors({
-            cpf: validationCPF,
-          });
-        }}
+        onBlur={fieldValidation}
+        name="cpf"
         error={!errors.cpf.isValid}
         helperText={errors.cpf.text}
         variant="outlined"
