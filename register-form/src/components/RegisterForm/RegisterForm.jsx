@@ -8,26 +8,18 @@ import UserData from "../UserData/UserData";
 function RegisterForm({ onSubmitForm, validation }) {
   const [currentStep, setCurrentStep] = useState(0);
 
+  const forms = [
+    <UserData onSubmitForm={nextStep} />,
+    <PersonalDetails onSubmitForm={nextStep} validation={validation} />,
+    <DeliveryDetails onSubmitForm={onSubmitForm} />,
+    <Typography>Error on form select!</Typography>,
+  ];
+
   function nextStep() {
     setCurrentStep(currentStep + 1);
   }
 
-  function CurrentForm(step) {
-    switch (step) {
-      case 0:
-        return <UserData onSubmitForm={nextStep} />;
-      case 1:
-        return (
-          <PersonalDetails onSubmitForm={nextStep} validation={validation} />
-        );
-      case 2:
-        return <DeliveryDetails onSubmitForm={onSubmitForm} />;
-      default:
-        return <Typography>Error on form select!</Typography>;
-    }
-  }
-
-  return <>{CurrentForm(currentStep)}</>;
+  return <>{forms[currentStep]}</>;
 }
 
 export default RegisterForm;
