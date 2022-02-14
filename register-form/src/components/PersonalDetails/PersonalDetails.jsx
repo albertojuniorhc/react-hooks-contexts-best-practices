@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, TextField, Switch, FormControlLabel } from "@mui/material";
 
-function RegisterForm({ onSubmitForm, isCPFValid }) {
+function RegisterForm({ onSubmitForm, validation }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [cpf, setCpf] = useState("");
@@ -45,7 +45,7 @@ function RegisterForm({ onSubmitForm, isCPFValid }) {
         id="cpf"
         label="CPF"
         onBlur={(event) => {
-          const validationCPF = isCPFValid(event.target.value);
+          const validationCPF = validation(event.target.value);
           setErrors({
             cpf: validationCPF,
           });

@@ -13,15 +13,12 @@ function App() {
       <Typography variant="h3" component="h1" align="center">
         Register Form
       </Typography>
-      <RegisterForm
-        onSubmitForm={onSubmitForm}
-        isCPFValid={isCPFValid}
-      />
+      <RegisterForm onSubmitForm={submitAllForms} validation={isCPFValid} />
     </Container>
   );
 }
 
-function onSubmitForm(dataForm) {
+function submitAllForms(dataForm) {
   console.log(dataForm);
 }
 

@@ -1,9 +1,14 @@
 import { TextField, Button } from "@mui/material";
 import React from "react";
 
-function DeliveryDetails() {
+function DeliveryDetails({ onSubmitForm }) {
   return (
-    <form>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSubmitForm("Full form data");
+      }}
+    >
       <TextField
         id="cep"
         label="Zip Code"
