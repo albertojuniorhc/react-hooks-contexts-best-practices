@@ -14,7 +14,7 @@ function App() {
         Register Form
       </Typography>
       <RegisterForm
-        submitForm={onSubmitForm}
+        onSubmitForm={onSubmitForm}
         isCPFValid={isCPFValid}
       />
     </Container>
