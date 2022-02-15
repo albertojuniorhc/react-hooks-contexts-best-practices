@@ -16,7 +16,11 @@ function App() {
       </Typography>
       <RegisterForm
         onSubmitForm={submitAllForms}
-        validations={{ cpf: isCPFValid, password: isPasswordValid }}
+        validations={{
+          cpf: isCPFValid,
+          password: isPasswordValid,
+          name: isPasswordValid,
+        }}
       />
     </Container>
   );

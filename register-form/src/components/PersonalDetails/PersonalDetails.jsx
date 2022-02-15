@@ -7,21 +7,34 @@ function RegisterForm({ onSubmitForm, validations }) {
   const [cpf, setCpf] = useState("");
   const [promo, setPromo] = useState(true);
   const [news, setNews] = useState(true);
-  const [errors, setErrors] = useState({ cpf: { isValid: true, text: "" } });
+  const [errors, setErrors] = useState({
+    cpf: { isValid: true, text: "" },
+    name: { isValid: true, text: "" },
+  });
 
   function fieldValidation(event) {
-    // console.log(validations)
     const { name, value } = event.target;
     const valid = validations[name](value);
     const newObjErrors = { ...errors, [name]: valid };
     setErrors(newObjErrors);
   }
 
+  function isValidSend() {
+    for (let field in errors) {
+      if (!errors[field].isValid) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmitForm({ name, lastName, cpf, promo, news });
+        if (isValidSend()) {
+          onSubmitForm({ name, lastName, cpf, promo, news });
+        }
       }}
     >
       <TextField
@@ -29,7 +42,11 @@ function RegisterForm({ onSubmitForm, validations }) {
         onChange={(event) => {
           setName(event.target.value);
         }}
+        onBlur={fieldValidation}
+        error={!errors.name.isValid}
+        helperText={errors.name.text}
         id="name"
+        name="name"
         label="Name"
         variant="outlined"
         fullWidth
