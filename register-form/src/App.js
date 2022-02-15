@@ -7,6 +7,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { isCPFValid, isPasswordValid } from "./models/validations";
+import RegisterValidations from "./contexts/RegisterValidations";
 
 function App() {
   return (
@@ -14,14 +15,15 @@ function App() {
       <Typography variant="h3" component="h1" align="center">
         Register Form
       </Typography>
-      <RegisterForm
-        onSubmitForm={submitAllForms}
-        validations={{
+      <RegisterValidations.Provider
+        value={{
           cpf: isCPFValid,
           password: isPasswordValid,
           name: isPasswordValid,
         }}
-      />
+      >
+        <RegisterForm onSubmitForm={submitAllForms} />
+      </RegisterValidations.Provider>
     </Container>
   );
 }

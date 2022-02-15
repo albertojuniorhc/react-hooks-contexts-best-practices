@@ -6,7 +6,7 @@ import DeliveryDetails from "../DeliveryDetails/DeliveryDetails";
 import PersonalDetails from "../PersonalDetails/PersonalDetails";
 import UserData from "../UserData/UserData";
 
-function RegisterForm({ onSubmitForm, validations }) {
+function RegisterForm({ onSubmitForm }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [dataCollected, setDataCollected] = useState({});
 
@@ -17,9 +17,9 @@ function RegisterForm({ onSubmitForm, validations }) {
   });
 
   const forms = [
-    <UserData onSubmitForm={dataCollect} validations={validations} />,
-    <PersonalDetails onSubmitForm={dataCollect} validations={validations} />,
-    <DeliveryDetails onSubmitForm={dataCollect} validations={validations} />,
+    <UserData onSubmitForm={dataCollect} />,
+    <PersonalDetails onSubmitForm={dataCollect} />,
+    <DeliveryDetails onSubmitForm={dataCollect} />,
     <Typography variant="h4">All data sent to server!</Typography>,
   ];
 

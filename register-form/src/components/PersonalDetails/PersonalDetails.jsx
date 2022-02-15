@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, TextField, Switch, FormControlLabel } from "@mui/material";
+import RegisterValidations from "../../../src/contexts/RegisterValidations"
 
-function RegisterForm({ onSubmitForm, validations }) {
+function PersonalDetails({ onSubmitForm }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [cpf, setCpf] = useState("");
@@ -11,6 +12,8 @@ function RegisterForm({ onSubmitForm, validations }) {
     cpf: { isValid: true, text: "" },
     name: { isValid: true, text: "" },
   });
+
+  const validations = useContext(RegisterValidations)
 
   function fieldValidation(event) {
     const { name, value } = event.target;
@@ -114,4 +117,4 @@ function RegisterForm({ onSubmitForm, validations }) {
   );
 }
 
-export default RegisterForm;
+export default PersonalDetails;
