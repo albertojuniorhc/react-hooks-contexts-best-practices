@@ -1,36 +1,19 @@
 import { Button, TextField } from "@mui/material";
 import React, { useContext, useState } from "react";
-import RegisterValidations from "../../../src/contexts/RegisterValidations"
+import RegisterValidations from "../../../src/contexts/RegisterValidations";
+import useErrors from "../../hooks/useErrors";
 
 function UserData({ onSubmitForm }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({
-    password: { isValid: true, text: "" },
-  });
   const validations = useContext(RegisterValidations);
-
-  function fieldValidation(event) {
-    const { name, value } = event.target;
-    const valid = validations[name](value);
-    const newObjErrors = { ...errors, [name]: valid };
-    setErrors(newObjErrors);
-  }
-
-  function isValidSend() {
-    for (let field in errors) {
-      if (!errors[field].isValid) {
-        return false;
-      }
-    }
-    return true;
-  }
+  const [errors, fieldValidation, isFormValid] = useErrors(validations);
 
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        if (isValidSend()) {
+        if (isFormValid()) {
           onSubmitForm({ email, password });
         }
       }}

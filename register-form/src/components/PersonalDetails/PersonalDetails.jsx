@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Button, TextField, Switch, FormControlLabel } from "@mui/material";
-import RegisterValidations from "../../../src/contexts/RegisterValidations"
+import RegisterValidations from "../../../src/contexts/RegisterValidations";
+import useErrors from "../../hooks/useErrors";
 
 function PersonalDetails({ onSubmitForm }) {
   const [name, setName] = useState("");
@@ -8,34 +9,14 @@ function PersonalDetails({ onSubmitForm }) {
   const [cpf, setCpf] = useState("");
   const [promo, setPromo] = useState(true);
   const [news, setNews] = useState(true);
-  const [errors, setErrors] = useState({
-    cpf: { isValid: true, text: "" },
-    name: { isValid: true, text: "" },
-  });
-
-  const validations = useContext(RegisterValidations)
-
-  function fieldValidation(event) {
-    const { name, value } = event.target;
-    const valid = validations[name](value);
-    const newObjErrors = { ...errors, [name]: valid };
-    setErrors(newObjErrors);
-  }
-
-  function isValidSend() {
-    for (let field in errors) {
-      if (!errors[field].isValid) {
-        return false;
-      }
-    }
-    return true;
-  }
+  const validations = useContext(RegisterValidations);
+  const [errors, fieldValidation, isFormValid] = useErrors(validations);
 
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        if (isValidSend()) {
+        if (isFormValid()) {
           onSubmitForm({ name, lastName, cpf, promo, news });
         }
       }}
